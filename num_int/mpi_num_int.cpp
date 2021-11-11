@@ -95,8 +95,6 @@ int main (int argc, char* argv[]) {
   auto stopTime = system_clock::now();
   std::cout << result;
   
-  auto stopTime = system_clock::now();
-  
   std::chrono::duration<double> diff = stopTime - startTime;
   
   std::cerr << diff.count();
