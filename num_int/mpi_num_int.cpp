@@ -67,29 +67,28 @@ int main (int argc, char* argv[]) {
   
   std::vector<float> results(total_processes);
   
-  if (rank != 0) { // For workers only
-    // Find out what part it does
-    int part_size = n / total_processes;
-    int start_index = part_size * (rank - 1);
-    int end_index = start_index + part_size - 1;
-    
-    if(rank + 1 == total_processes) { // last part special case
+  
+  // Find out what part it does
+  int part_size = n / total_processes;
+  int start_index = part_size * rank;
+  int end_index = start_index + part_size - 1;
+
+  if(rank + 1 == total_processes) { // last part special case
       end_index = n;
-    }
-    
-    for(int i = start_index; i < end_index; i++) {
+  }
+
+  for(int i = start_index; i < end_index; i++) {
       float x_value = lowerBound + (i + 0.5f) * start;
       temp += get_function_value(fuctionID, x_value, intensity);
-    }
   }
-  
+
   // Submit work
   MPI_Gather(&temp, 1, MPI_FLOAT,
-            &(results[1]), total_processes, MPI_FLOAT,
+            &(results[0]), total_processes, MPI_FLOAT,
              0, MPI_COMM_WORLD);
   
   // sum up all of the work
-  for (int i = 1; i < total_processes; i++) {
+  for (int i = 0; i < total_processes; i++) {
     result += results[i];
   }
   auto stopTime = system_clock::now();
