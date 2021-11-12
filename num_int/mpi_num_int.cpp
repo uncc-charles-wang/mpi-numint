@@ -65,7 +65,7 @@ int main (int argc, char* argv[]) {
   float start = (upperBound - lowerBound) / static_cast<float>(n);
   float temp = 0.0f;
   
-  float results[total_processes];
+  float results[total_processes] = {0};
   //std::vector<float> results(total_processes);
   
   
@@ -83,6 +83,8 @@ int main (int argc, char* argv[]) {
       temp += get_function_value(fuctionID, x_value, intensity);
   }
 
+  std::cout << rank << " ," << temp << std::endl;
+  
   // Submit work
   MPI_Gather(&temp, 1, MPI_FLOAT,
             results, total_processes, MPI_FLOAT,
