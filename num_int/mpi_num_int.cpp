@@ -87,7 +87,7 @@ int main (int argc, char* argv[]) {
   
   // Submit work
   MPI_Gather(&temp, 1, MPI_FLOAT,
-            results, total_processes, MPI_FLOAT,
+            results, total_processes * sizeof(MPI_FLOAT), MPI_FLOAT,
              0, MPI_COMM_WORLD);
   
   if (rank == 0) {
@@ -99,7 +99,7 @@ int main (int argc, char* argv[]) {
     result = start * result;
     
     auto stopTime = system_clock::now();
-    std::cout << result;
+    std::cout << result << std::endl;
     
     std::chrono::duration<double> diff = stopTime - startTime;
     
