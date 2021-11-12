@@ -87,16 +87,23 @@ int main (int argc, char* argv[]) {
             &(results[0]), total_processes, MPI_FLOAT,
              0, MPI_COMM_WORLD);
   
-  // sum up all of the work
-  for (int i = 0; i < total_processes; i++) {
-    result += results[i];
-  }
-  auto stopTime = system_clock::now();
-  std::cout << result;
+  if (rank == 0) {
+    // sum up all of the work
+    for (int i = 0; i < total_processes; i++) {
+      result += results[i];
+    }
+    
+    result = start * result;
+    
+    auto stopTime = system_clock::now();
+    std::cout << result;
+    
+    std::chrono::duration<double> diff = stopTime - startTime;
+    
+    std::cerr << diff.count();
+}
   
-  std::chrono::duration<double> diff = stopTime - startTime;
   
-  std::cerr << diff.count();
   
 
   MPI_Finalize();
