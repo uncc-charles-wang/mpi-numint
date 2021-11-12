@@ -83,7 +83,7 @@ int main (int argc, char* argv[]) {
       temp += get_function_value(fuctionID, x_value, intensity);
   }
 
-  std::cout << rank << " ," << temp << std::endl;
+  //std::cout << rank << " ," << temp << std::endl;
   
   // Submit work
   
@@ -102,7 +102,7 @@ int main (int argc, char* argv[]) {
     result = start * result;
     
     auto stopTime = system_clock::now();
-    std::cout << result << std::endl;
+    std::cout << result;
     
     std::chrono::duration<double> diff = stopTime - startTime;
     
