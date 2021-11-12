@@ -65,7 +65,8 @@ int main (int argc, char* argv[]) {
   float start = (upperBound - lowerBound) / static_cast<float>(n);
   float temp = 0.0f;
   
-  std::vector<float> results(total_processes);
+  float results[total_processes];
+  //std::vector<float> results(total_processes);
   
   
   // Find out what part it does
@@ -84,7 +85,7 @@ int main (int argc, char* argv[]) {
 
   // Submit work
   MPI_Gather(&temp, 1, MPI_FLOAT,
-            (results), total_processes, MPI_FLOAT,
+            results, total_processes, MPI_FLOAT,
              0, MPI_COMM_WORLD);
   
   if (rank == 0) {
