@@ -65,7 +65,7 @@ int main (int argc, char* argv[]) {
   float start = (upperBound - lowerBound) / static_cast<float>(n);
   float temp = 0.0f;
   
-  float results[total_processes] = {0};
+  //float results[total_processes] = {0};
   //std::vector<float> results(total_processes);
   
   
@@ -78,7 +78,7 @@ int main (int argc, char* argv[]) {
       end_index = n;
   }
 
-  for(int i = start_index; i <= end_index; i++) {
+  for(int i = start_index; i < end_index; i++) {
       float x_value = lowerBound + (i + 0.5f) * start;
       temp += get_function_value(fuctionID, x_value, intensity);
   }
