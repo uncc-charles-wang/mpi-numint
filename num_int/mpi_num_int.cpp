@@ -86,16 +86,18 @@ int main (int argc, char* argv[]) {
   std::cout << rank << " ," << temp << std::endl;
   
   // Submit work
+  
+  /*
   MPI_Gather(&temp, 1, MPI_FLOAT,
             &(results[0]), total_processes, MPI_FLOAT,
              0, MPI_COMM_WORLD);
+  */
+  
+  MPI_Reduce(&temp, &result,1, MPI_FLOAT,
+            MPI_SUM, 0, MPI_COMM_WORLD);
   
   if (rank == 0) {
     // sum up all of the work
-    for (int i = 0; i < total_processes; i++) {
-      result += results[i];
-      std::cout << results[i] << std::endl;
-    }
     
     result = start * result;
     
