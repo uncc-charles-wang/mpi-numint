@@ -84,7 +84,7 @@ int main (int argc, char* argv[]) {
 
   // Submit work
   MPI_Gather(&temp, 1, MPI_FLOAT,
-            &(results[0]), total_processes, MPI_FLOAT,
+            (results[0]), total_processes, MPI_FLOAT,
              0, MPI_COMM_WORLD);
   
   if (rank == 0) {
