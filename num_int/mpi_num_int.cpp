@@ -94,6 +94,7 @@ int main (int argc, char* argv[]) {
     // sum up all of the work
     for (int i = 0; i < total_processes; i++) {
       result += results[i];
+      std::cout << results[i] << std::endl;
     }
     
     result = start * result;
