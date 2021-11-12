@@ -78,7 +78,7 @@ int main (int argc, char* argv[]) {
       end_index = n;
   }
 
-  for(int i = start_index; i < end_index; i++) {
+  for(int i = start_index; i <= end_index; i++) {
       float x_value = lowerBound + (i + 0.5f) * start;
       temp += get_function_value(fuctionID, x_value, intensity);
   }
@@ -86,12 +86,6 @@ int main (int argc, char* argv[]) {
   //std::cout << rank << " ," << temp << std::endl;
   
   // Submit work
-  
-  /*
-  MPI_Gather(&temp, 1, MPI_FLOAT,
-            &(results[0]), total_processes, MPI_FLOAT,
-             0, MPI_COMM_WORLD);
-  */
   
   MPI_Reduce(&temp, &result,1, MPI_FLOAT,
             MPI_SUM, 0, MPI_COMM_WORLD);
