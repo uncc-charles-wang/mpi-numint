@@ -72,7 +72,7 @@ int main (int argc, char* argv[]) {
   // Find out what part it does
   int part_size = n / total_processes;
   int start_index = part_size * rank;
-  int end_index = start_index + part_size - 1;
+  int end_index = start_index + part_size;
 
   if(rank + 1 == total_processes) { // last part special case
       end_index = n;
